@@ -1,0 +1,58 @@
+﻿@using CrudOpreation.Entity.Model
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterList</title>
+	<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+	<form method="post" asp-action="RegisterList" asp-controller="Register">
+		<div style="margin-top:50px;" class="container panel-body">
+			<table class="table table-bordered table-danger">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Edit</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@{
+
+						if (ViewData["RegisterData"] != null)
+						{
+							@foreach (var item in ViewData["RegisterData"] as List<RegisterTbl>)
+							{
+								<tr>
+									<th scope="row">@item.RegId</th>
+									<td>@item.Name</td>
+									<td>@item.Email</td>
+
+
+									<td><a asp-action="RegisterIndex" asp-controller="Register" asp-route-id="@item.RegId" class="btn btn-success " title="">Edit</a></td>
+
+									<td><a asp-action="Delete" asp-route-id="@item.RegId" class="btn btn-danger" title="">Delete</a></td>
+
+
+								</tr>
+							}
+						}
+
+					}
+				</tbody>
+			</table>
+		</div>
+
+
+	</form>
+</body>
+</html>

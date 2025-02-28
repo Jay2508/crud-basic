@@ -1,0 +1,60 @@
+﻿@using CrudOpreation.Entity.Model
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>ManagaeList</title>
+	<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<form method="post" asp-action="ManagaeList" asp-controller="RegisterTbl">
+		<div style="margin-top:50px;" class="container panel-body">
+			<table class="table table-bordered table-danger">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Edit</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@{
+
+						if (ViewData["RegisterData"] != null)
+						{
+							@foreach (var item in ViewData["RegisterData"] as List<RegisterTbl>)
+							{
+								<tr>
+									<th scope="row">@item.RegId</th>
+									<td>@item.Name</td>
+									<td>@item.Email</td>
+
+
+									<td><a asp-action="FormAdd" asp-controller="RegisterTbl" asp-route-id="@item.RegId" class="btn btn-success " title="">Edit</a></td>
+
+									<td><a asp-action="Delete" onclick="return confirm('Are You Sure Want to Delete Data?')"  asp-route-id="@item.RegId" class="btn btn-danger" title="">Delete</a></td>
+
+
+								</tr>
+							}
+						}
+
+					}
+				</tbody>
+			</table>
+		</div>
+		@ViewBag.Msg
+
+	</form>
+</body>
+</html>
+
+@* <td><a class="btn btn-danger" onclick="return confirm('Are You Sure Want to Delete Data?')" href="@Url.Action("Delete/"+item.RegId,"RegisterTbl")">Delete</a></td> *@
